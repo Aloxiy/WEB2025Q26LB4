@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-cloud-sun"></i> Прогноз погоды</h1>
+            <button id="refreshBtn" class="refresh-btn">
+                <i class="fas fa-sync-alt"></i> Обновить
+            </button>
+        </header>
+
+        <main>
+            <!-- Основная информация о погоде -->
+            <section class="weather-container">
+                <div id="currentWeather" class="current-weather">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner"></div>
+                        <p>Загрузка данных о погоде...</p>
+                    </div>
+                </div>
+
+                <!-- Форма добавления города (появляется при отказе от геолокации) -->
+                <div id="locationForm" class="location-form" style="display: none;">
+                    <h2><i class="fas fa-map-marker-alt"></i> Введите город</h2>
+                    <div class="form-group">
+                        <input type="text" id="cityInput" placeholder="Начните вводить название города...">
+                        <button id="searchCityBtn" class="btn">
+                            <i class="fas fa-search"></i> Найти
+                        </button>
+                    </div>
+                    <div id="citySuggestions" class="suggestions"></div>
+                    <div id="cityError" class="error-message"></div>
+                </div>
+
+                <!-- Секция для добавленных городов -->
+                <section class="added-cities">
+                    <h2><i class="fas fa-city"></i> Добавленные города</h2>
+                    <div class="add-city-form">
+                        <input type="text" id="addCityInput" placeholder="Добавить город...">
+                        <button id="addCityBtn" class="btn-small">
+                            <i class="fas fa-plus"></i> Добавить
+                        </button>
+                    </div>
+                    <div id="addCitySuggestions" class="suggestions"></div>
+                    <div id="addCityError" class="error-message"></div>
+                    <div id="citiesList" class="cities-grid"></div>
+                </section>
+            </section>
+
+            <!-- Контейнер для прогноза на несколько дней -->
+            <section class="forecast-section">
+                <h2><i class="fas fa-calendar-alt"></i> Прогноз на 3 дня</h2>
+                <div id="forecastContainer" class="forecast-container"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Используется Open-Meteo API | Лабораторная работа №4</p>
+        </footer>
+    </div>
+
+    <!-- Модальное окно для геолокации -->
+    <div id="geolocationModal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-location-dot"></i> Доступ к геолокации</h2>
+            <p>Разрешить доступ к вашему местоположению для показа погоды в вашем районе?</p>
+            <div class="modal-buttons">
+                <button id="allowGeolocation" class="btn btn-success">
+                    <i class="fas fa-check"></i> Разрешить
+                </button>
+                <button id="denyGeolocation" class="btn btn-danger">
+                    <i class="fas fa-times"></i> Отказать
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
